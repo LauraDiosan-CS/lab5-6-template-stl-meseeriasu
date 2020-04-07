@@ -13,5 +13,5 @@ void testMasina() {
 	assert(strcmp(car1.getStatus(), "ocupat") == 0);
 	car2 = car1;
 	assert(car2 == car1);
-	cout << "Domain tests done!" << endl;
+	cout << "tests done!" << endl;
 }

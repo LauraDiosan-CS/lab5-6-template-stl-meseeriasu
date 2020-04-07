@@ -6,10 +6,15 @@ using namespace std;
 
 class Repository {
 	private:
-		list<Masina> elem;
+		list <Masina> elem;
 	public:
 		Repository();
-		void addElem(const Masina);
-		list<Masina> getAll();
+		void addElem(Masina);
+		void updateElem(Masina, const char*, const char*, const char*);
+		int findElem(Masina);
+		void delElem(Masina);
+		Masina elemAtPoz(int);
+		int size();
+		list <Masina> getAll();
 		~Repository();
 };

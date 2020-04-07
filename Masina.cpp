@@ -20,7 +20,7 @@ Masina::Masina(const Masina& m) {
 	this->numePosesor = new char[strlen(m.numePosesor) + 1];
 	strcpy_s(this->numePosesor, strlen(m.numePosesor) + 1, m.numePosesor);
 	this->nrInmatriculare = new char[strlen(m.nrInmatriculare) + 1];
-	strcpy_s(this->nrInmatriculare, strlen(m.numePosesor) + 1, m.nrInmatriculare);
+	strcpy_s(this->nrInmatriculare, strlen(m.nrInmatriculare) + 1, m.nrInmatriculare);
 	this->status = new char[strlen(m.status) + 1];
 	strcpy_s(this->status, strlen(m.status) + 1, m.status);
 }
@@ -66,7 +66,7 @@ void Masina::setNrInmatriculare(const char* nr) {
 void Masina::setStatus(const char* stat) {
 	if (status) delete[] status;
 	status = new char[strlen(stat) + 1];
-	strcpy_s(status, strlen(status) + 1, stat);
+	strcpy_s(status, strlen(stat) + 1, stat);
 }
 
 bool Masina::operator==(const Masina& m) {

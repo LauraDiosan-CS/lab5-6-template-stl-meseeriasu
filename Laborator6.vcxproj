@@ -150,14 +150,20 @@
     <ClCompile Include="Laborator6.cpp" />
     <ClCompile Include="Masina.cpp" />
     <ClCompile Include="Repository.cpp" />
+    <ClCompile Include="Service.cpp" />
     <ClCompile Include="TestDomain.cpp" />
     <ClCompile Include="testRepository.cpp" />
+    <ClCompile Include="TestService.cpp" />
+    <ClCompile Include="UserInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Masina.h" />
     <ClInclude Include="Repository.h" />
+    <ClInclude Include="Service.h" />
     <ClInclude Include="TestDomain.h" />
     <ClInclude Include="TestRepository.h" />
+    <ClInclude Include="TestService.h" />
+    <ClInclude Include="UserInterface.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
