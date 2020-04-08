@@ -16,6 +16,7 @@ void UserInterface::showMenu() {
 	cout << "2. Update masina" << endl;
 	cout << "3. Sterge masina" << endl;
 	cout << "4. Afiseaza masini" << endl;
+	cout << "5. Adauga masina in parcare" << endl;
 	cout << "0. Exit" << endl;
 	cout << endl;
 }
@@ -79,7 +80,24 @@ void UserInterface::updateMasina() {
 	cout << endl;
 }
 
+void UserInterface::addMasinaParcare() {
+	char* nrInmatriculare;
+	nrInmatriculare = new char[10];
+	cout << "Nr inmatriculare: ";	cin >> nrInmatriculare;
+	int op = service.addMasinaParcare(nrInmatriculare);
+	if (op == 1)
+		cout << "Masina este deja in parcare!" << endl;
+	if (op == 2)
+		cout << "Parcarea este plina!" << endl;
+	if (op == 3)
+		cout << "Masina nu este in repository!" << endl;
+}
+
 void UserInterface::run() {
+	int nr;
+	cout << "Nr. locuri de parcare: ";	cin >> nr;
+	cout << endl;
+	service.setLocuriParcare(nr);
 	bool gata = true;
 	while (gata)
 	{
@@ -94,6 +112,7 @@ void UserInterface::run() {
 		case 2: {updateMasina(); break;}
 		case 3: {deleteMasina(); break;}
 		case 4: {printMasini(); break;}
+		case 5: {addMasinaParcare(); break;}
 		}
 	}
 }

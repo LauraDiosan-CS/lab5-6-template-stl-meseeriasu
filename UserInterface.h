@@ -2,16 +2,17 @@
 #include "Service.h"
 
 class UserInterface {
-	private:
-		Service service;
-	public:
-		UserInterface();
-		UserInterface(const Service&);
-		void showMenu();
-		void addMasina();
-		void deleteMasina();
-		void updateMasina();
-		void printMasini();
-		void run();
-		~UserInterface();
+private:
+	Service service;
+public:
+	UserInterface();
+	UserInterface(const Service&);
+	void showMenu();
+	void addMasina();
+	void deleteMasina();
+	void updateMasina();
+	void printMasini();
+	void addMasinaParcare();
+	void run();
+	~UserInterface();
 };

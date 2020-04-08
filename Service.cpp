@@ -7,6 +7,10 @@ Service::Service(const Repository& r) {
 	repo = r;
 }
 
+void Service::setLocuriParcare(int n) {
+	repo.setLocuriParcare(n);
+}
+
 void Service::addMasina(const char* numePosesor, const char* nrInmatriculare, const char* status) {
 	Masina c(numePosesor, nrInmatriculare, status);
 	repo.addElem(c);
@@ -36,6 +40,10 @@ void Service::updateMasina(const char* nrInmatriculare, const char* newNumePoses
 			repo.updateElem(car, newNumePosesor, newNrInmatriculare, newStatus); break;
 		}
 	}
+}
+
+int Service::addMasinaParcare(const char* nrInmatriculare) {
+	return repo.intrareParcare(nrInmatriculare);
 }
 
 Masina Service::elemAtPoz(int j)
