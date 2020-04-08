@@ -12,7 +12,6 @@ public:
 	void deleteMasina();
 	void updateMasina();
 	void printMasini();
-	void addMasinaParcare();
 	void run();
 	~UserInterface();
 };

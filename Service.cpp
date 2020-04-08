@@ -1,19 +1,32 @@
 #include "Service.h"
 
 Service::Service() {
+	locuriParcare = 0;
 }
 
 Service::Service(const Repository& r) {
 	repo = r;
+	locuriParcare = 0;
 }
 
 void Service::setLocuriParcare(int n) {
-	repo.setLocuriParcare(n);
+	locuriParcare = n;
 }
 
-void Service::addMasina(const char* numePosesor, const char* nrInmatriculare, const char* status) {
+int Service::addMasina(const char* numePosesor, const char* nrInmatriculare, const char* status) {
+	if (repo.size() == locuriParcare)
+		return 1;
+	for (int i = 0;i < repo.size();i++)
+	{
+		Masina m = repo.elemAtPoz(i);
+		if (strcmp(m.getNrInmatriculare(), nrInmatriculare) == 0)
+			return 2;
+	}
+	if (strcmp(status, "ocupat") == 0)
+		return 3;
 	Masina c(numePosesor, nrInmatriculare, status);
 	repo.addElem(c);
+	return 0;
 }
 
 list<Masina> Service::getAll() {
@@ -40,10 +53,6 @@ void Service::updateMasina(const char* nrInmatriculare, const char* newNumePoses
 			repo.updateElem(car, newNumePosesor, newNrInmatriculare, newStatus); break;
 		}
 	}
-}
-
-int Service::addMasinaParcare(const char* nrInmatriculare) {
-	return repo.intrareParcare(nrInmatriculare);
 }
 
 Masina Service::elemAtPoz(int j)

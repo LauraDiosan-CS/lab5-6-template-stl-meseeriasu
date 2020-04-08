@@ -22,6 +22,7 @@ void UserInterface::showMenu() {
 }
 
 void UserInterface::addMasina() {
+	int op;
 	char* numePosesor = NULL, * nrInmatriculare = NULL, * status = NULL;
 	numePosesor = new char[20];
 	nrInmatriculare = new char[20];
@@ -29,14 +30,21 @@ void UserInterface::addMasina() {
 	cout << "Nume posesor: ";	cin >> numePosesor;
 	cout << "Numar inmatriculare: ";	cin >> nrInmatriculare;
 	cout << "Status (ocupat, liber): ";	cin >> status;
-	service.addMasina(numePosesor, nrInmatriculare, status);
+	op = service.addMasina(numePosesor, nrInmatriculare, status);
+	if (op == 1)
+		cout << "Parcarea este plina!" << endl;
+	if (op == 2)
+		cout << "Masina este deja in parcare!" << endl;
+	if (op == 3)
+		cout << "Masina are statusul ocupat!" << endl;
 	if (numePosesor)
 		delete[] numePosesor;
 	if (nrInmatriculare)
 		delete[] nrInmatriculare;
 	if (status)
 		delete[] status;
-	cout << "Masina adaugata!" << endl;
+	if (op == 0)
+		cout << "Masina adaugata!" << endl;
 	cout << endl;
 }
 
@@ -80,24 +88,11 @@ void UserInterface::updateMasina() {
 	cout << endl;
 }
 
-void UserInterface::addMasinaParcare() {
-	char* nrInmatriculare;
-	nrInmatriculare = new char[10];
-	cout << "Nr inmatriculare: ";	cin >> nrInmatriculare;
-	int op = service.addMasinaParcare(nrInmatriculare);
-	if (op == 1)
-		cout << "Masina este deja in parcare!" << endl;
-	if (op == 2)
-		cout << "Parcarea este plina!" << endl;
-	if (op == 3)
-		cout << "Masina nu este in repository!" << endl;
-}
-
 void UserInterface::run() {
 	int nr;
 	cout << "Nr. locuri de parcare: ";	cin >> nr;
-	cout << endl;
 	service.setLocuriParcare(nr);
+	cout << endl;
 	bool gata = true;
 	while (gata)
 	{
@@ -112,7 +107,6 @@ void UserInterface::run() {
 		case 2: {updateMasina(); break;}
 		case 3: {deleteMasina(); break;}
 		case 4: {printMasini(); break;}
-		case 5: {addMasinaParcare(); break;}
 		}
 	}
 }

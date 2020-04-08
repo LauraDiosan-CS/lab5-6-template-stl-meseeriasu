@@ -8,14 +8,14 @@ using namespace std;
 class Service {
 private:
 	Repository repo;
+	int locuriParcare;
 public:
 	Service();
 	Service(const Repository&);
-	void setLocuriParcare(int);
-	void addMasina(const char*, const char*, const char*);
+	int addMasina(const char*, const char*, const char*);
 	void delMasina(const char*);
+	void setLocuriParcare(int);
 	void updateMasina(const char*, const char*, const char*, const char*);
-	int addMasinaParcare(const char*);
 	Masina elemAtPoz(int);
 	list<Masina> getAll();
 	~Service();

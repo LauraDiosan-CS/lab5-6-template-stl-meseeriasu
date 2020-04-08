@@ -3,19 +3,6 @@
 using namespace std;
 
 Repository::Repository() {
-	locuriParcare = 0;
-	statusLocuri = 0;
-	parcare = new char* [10];
-	for (int count = 0; count < 10; ++count)
-		parcare[count] = new char[10];
-}
-
-void Repository::setLocuriParcare(int n) {
-	locuriParcare = n;
-}
-
-int Repository::getLocuriParcare() {
-	return locuriParcare;
 }
 
 void Repository::addElem(Masina m) {
@@ -66,32 +53,5 @@ Masina Repository::elemAtPoz(int j) {
 	}
 }
 
-int Repository::intrareParcare(const char* nrImatriculare) {
-	for (int i = 0;i < locuriParcare;i++)
-		if (strcmp(parcare[i], nrImatriculare) == 0)
-			return 1;
-	if (statusLocuri == locuriParcare)
-		return 2;
-	bool masinaRepository = false;
-	for (int i = 0;i < size();i++)
-	{
-		Masina m;
-		m = elemAtPoz(i);
-		if (strcmp(m.getNrInmatriculare(), nrImatriculare) == 0)
-		{
-			masinaRepository = true;
-			break;
-		}
-	}
-	if (masinaRepository == false)
-		return 3;
-	strcpy_s(parcare[statusLocuri], strlen(nrImatriculare) + 1, nrImatriculare);
-	statusLocuri++;
-	return 0;
-}
-
 Repository::~Repository() {
-	for (int count = 0; count < 10; ++count)
-		delete[] parcare[count];
-	delete[] parcare;
 }
