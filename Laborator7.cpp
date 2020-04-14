@@ -2,7 +2,7 @@
 #include "TestDomain.h"
 #include "TestRepository.h"
 #include "TestService.h"
-#include "Repository.h"
+#include "RepositoryFile.h"
 #include "Service.h"
 #include "UserInterface.h"
 
@@ -13,7 +13,7 @@ int main()
 	testMasina();
 	testRepository();
 	testService();
-	Repository r;
+	RepositoryFile<Masina> r("masini.txt");
 	Service s(r);
 	UserInterface ui(s);
 	ui.run();

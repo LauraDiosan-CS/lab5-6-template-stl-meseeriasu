@@ -1,4 +1,5 @@
 #include "Masina.h"
+#include <sstream>
 #include <string.h>
 
 Masina::Masina() {
@@ -14,6 +15,18 @@ Masina::Masina(const char* numePosesor, const char* nrInmatriculare, const char*
 	strcpy_s(this->nrInmatriculare, strlen(nrInmatriculare) + 1, nrInmatriculare);
 	this->status = new char[strlen(status) + 1];
 	strcpy_s(this->status, strlen(status) + 1, status);
+}
+
+Masina::Masina(string linie) {
+	std::istringstream iss(linie);
+	string tok1, tok2, tok3;
+	iss >> tok1 >> tok2 >> tok3;
+	numePosesor = new char [tok1.length() + 1];
+	strcpy_s(numePosesor, tok1.length() + 1, tok1.c_str());
+	nrInmatriculare = new char[tok2.length() + 1];
+	strcpy_s(nrInmatriculare, tok2.length() + 1, tok2.c_str());
+	status = new char[tok3.length() + 1];
+	strcpy_s(status, tok3.length() + 1, tok3.c_str());
 }
 
 Masina::Masina(const Masina& m) {
@@ -73,6 +86,30 @@ bool Masina::operator==(const Masina& m) {
 	return (strcmp(numePosesor, m.numePosesor) == 0) and (strcmp(nrInmatriculare, m.nrInmatriculare) == 0) and (strcmp(status, m.status) == 0);
 }
 
+ostream& operator<<(ostream& os, Masina m) {
+	os << m.getNumePosesor() << " " << m.getNrInmatriculare() << " " << m.getStatus() << endl;
+	return os;
+}
+
+istream& operator>>(istream& is, Masina& m) {
+	char* numePosesor = NULL, * nrInmatriculare = NULL, * status = NULL;
+	numePosesor = new char[20];
+	nrInmatriculare = new char[20];
+	status = new char[20];
+	cout << "Nume posesor: ";	is >> numePosesor;
+	cout << "Numar inmatriculare: ";	is >> nrInmatriculare;
+	cout << "Status (ocupat, liber): ";	is >> status;
+	m.setNumePosesor(numePosesor);
+	m.setNrInmatriculare(nrInmatriculare);
+	m.setStatus(status);
+	if (numePosesor)
+		delete[] numePosesor;
+	if (nrInmatriculare)
+		delete[] nrInmatriculare;
+	if (status)
+		delete[] status;
+	return is;
+}
 
 Masina::~Masina() {
 	if (numePosesor) delete[] numePosesor;

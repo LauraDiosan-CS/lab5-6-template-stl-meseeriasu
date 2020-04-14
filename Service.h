@@ -1,22 +1,22 @@
 #pragma once
 #include <list>
 #include "Masina.h"
-#include "Repository.h"
+#include "RepositoryFile.h"
 
 using namespace std;
 
 class Service {
 private:
-	Repository repo;
-	int locuriParcare;
+	RepositoryFile<Masina> repo;
+	int locuriParcare, depasesteCapacitatea;
 public:
 	Service();
-	Service(const Repository&);
-	int addMasina(const char*, const char*, const char*);
-	void delMasina(const char*);
+	Service(const RepositoryFile<Masina>&);
+	int addMasina(Masina&);
+	int delMasina(Masina&);
 	void setLocuriParcare(int);
-	void updateMasina(const char*, const char*, const char*, const char*);
-	Masina elemAtPoz(int);
+	void updateMasina(Masina&, Masina&);
+	int getDepasesteCapacitatea();
 	list<Masina> getAll();
 	~Service();
 };

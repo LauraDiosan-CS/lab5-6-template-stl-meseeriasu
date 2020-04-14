@@ -21,9 +21,6 @@
     <ClCompile Include="Masina.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Repository.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Service.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -44,9 +41,6 @@
     <ClInclude Include="Masina.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Repository.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Service.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -60,6 +54,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TestRepository.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RepoTemplate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RepositoryFile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

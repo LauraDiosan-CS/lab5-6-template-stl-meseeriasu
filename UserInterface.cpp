@@ -16,74 +16,60 @@ void UserInterface::showMenu() {
 	cout << "2. Update masina" << endl;
 	cout << "3. Sterge masina" << endl;
 	cout << "4. Afiseaza masini" << endl;
-	cout << "5. Adauga masina in parcare" << endl;
+	cout << "5. Numarul de masini cu care se depaseste capacitatea" << endl;
 	cout << "0. Exit" << endl;
 	cout << endl;
 }
 
 void UserInterface::addMasina() {
 	int op;
-	char* numePosesor = NULL, * nrInmatriculare = NULL, * status = NULL;
-	numePosesor = new char[20];
-	nrInmatriculare = new char[20];
-	status = new char[20];
-	cout << "Nume posesor: ";	cin >> numePosesor;
-	cout << "Numar inmatriculare: ";	cin >> nrInmatriculare;
-	cout << "Status (ocupat, liber): ";	cin >> status;
-	op = service.addMasina(numePosesor, nrInmatriculare, status);
+	Masina m;
+	cout << "Dati masina: "; cin >> m;
+	op = service.addMasina(m);
 	if (op == 1)
 		cout << "Parcarea este plina!" << endl;
 	if (op == 2)
 		cout << "Masina este deja in parcare!" << endl;
 	if (op == 3)
 		cout << "Masina are statusul ocupat!" << endl;
-	if (numePosesor)
-		delete[] numePosesor;
-	if (nrInmatriculare)
-		delete[] nrInmatriculare;
-	if (status)
-		delete[] status;
 	if (op == 0)
 		cout << "Masina adaugata!" << endl;
 	cout << endl;
 }
 
+void UserInterface::depasesteCapacitatea() {
+	cout << "Numarul de masini care depasesc capacitatea este: " << service.getDepasesteCapacitatea() << endl;
+}
+
 void UserInterface::printMasini() {
-	for (int i = 0;i < service.getAll().size();i++)
-		cout << service.elemAtPoz(i).getNumePosesor() << " " << service.elemAtPoz(i).getNrInmatriculare() << " " << service.elemAtPoz(i).getStatus() << endl;
+	list<Masina> masini = service.getAll();
+	for (Masina m : masini)
+		cout << m;
 	cout << endl;
 }
 
 void UserInterface::deleteMasina() {
-	char* nrInmatriculare = NULL;
-	nrInmatriculare = new char[20];
-	cout << "Nr. de inmatriculare: ";	cin >> nrInmatriculare;
-	service.delMasina(nrInmatriculare);
-	if (nrInmatriculare)
-		delete[] nrInmatriculare;
-	cout << "Masina stearsa!" << endl;
-	cout << endl;
+	int op;
+	Masina m;
+	cout << "Dati masina: ";	cin >> m;
+	op = service.delMasina(m);
+	if (op == -1)
+	{
+		cout << "Masina are statusul liber";
+		cout << endl;
+	}
+	else
+	{
+		cout << "Masina a fost stearsa!";
+		cout << endl;
+	}
 }
 
 void UserInterface::updateMasina() {
-	char* nrInmatriculare = NULL, * newNumePosesor = NULL, * newNrInmatriculare = NULL, * newStatus = NULL;
-	nrInmatriculare = new char[20];
-	newNumePosesor = new char[20];
-	newNrInmatriculare = new char[20];
-	newStatus = new char[20];
-	cout << "Nr. inmatriculare: ";	cin >> nrInmatriculare;
-	cout << "Noul posesor: ";	cin >> newNumePosesor;
-	cout << "Noul nr. de inmatriculare: ";	cin >> newNrInmatriculare;
-	cout << "Noul status: ";	cin >> newStatus;
-	service.updateMasina(nrInmatriculare, newNumePosesor, newNrInmatriculare, newStatus);
-	if (nrInmatriculare)
-		delete[] nrInmatriculare;
-	if (newNumePosesor)
-		delete[] newNumePosesor;
-	if (newNrInmatriculare)
-		delete[] newNrInmatriculare;
-	if (newStatus)
-		delete[] newStatus;
+	Masina masinaVeche, masinaNoua;
+	cout << "Dati masina: "; cin >> masinaVeche;
+	cout << "Dati masina noua: "; cin >> masinaNoua;
+	service.updateMasina(masinaVeche, masinaNoua);
 	cout << "Update realizat!" << endl;
 	cout << endl;
 }
@@ -107,6 +93,7 @@ void UserInterface::run() {
 		case 2: {updateMasina(); break;}
 		case 3: {deleteMasina(); break;}
 		case 4: {printMasini(); break;}
+		case 5: {depasesteCapacitatea(); break;}
 		}
 	}
 }

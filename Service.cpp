@@ -1,31 +1,40 @@
 #include "Service.h"
 
 Service::Service() {
+	depasesteCapacitatea = 0;
 	locuriParcare = 0;
 }
 
-Service::Service(const Repository& r) {
+Service::Service(const RepositoryFile<Masina>& r) {
 	repo = r;
 	locuriParcare = 0;
+	depasesteCapacitatea = 0;
 }
 
 void Service::setLocuriParcare(int n) {
 	locuriParcare = n;
 }
 
-int Service::addMasina(const char* numePosesor, const char* nrInmatriculare, const char* status) {
+int Service::addMasina(Masina& m) {
 	if (repo.size() == locuriParcare)
-		return 1;
-	for (int i = 0;i < repo.size();i++)
 	{
-		Masina m = repo.elemAtPoz(i);
-		if (strcmp(m.getNrInmatriculare(), nrInmatriculare) == 0)
-			return 2;
+		depasesteCapacitatea++;
+		return 1;
 	}
-	if (strcmp(status, "ocupat") == 0)
+	list<Masina> lista = repo.getAll();
+	list<Masina>::iterator it = lista.begin();
+	for (int i = 0;i < lista.size();i++)
+	{
+		if (strcmp((*it).getNrInmatriculare(), m.getNrInmatriculare()) == 0)
+			return 2;
+		advance(it, 1);
+	}
+	if (strcmp(m.getStatus(), "ocupat") == 0)
 		return 3;
-	Masina c(numePosesor, nrInmatriculare, status);
-	repo.addElem(c);
+	m.setStatus("ocupat");
+	repo.addElem(m);
+	repo.saveToFile();
+	depasesteCapacitatea = 0;
 	return 0;
 }
 
@@ -33,31 +42,22 @@ list<Masina> Service::getAll() {
 	return repo.getAll();
 }
 
-void Service::delMasina(const char* nrInamtriculare) {
-	for (int i = 0;i < repo.size();i++)
-	{
-		Masina car = repo.elemAtPoz(i);
-		if (strcmp(car.getNrInmatriculare(), nrInamtriculare) == 0)
-		{
-			repo.delElem(car); break;
-		}
-	}
+int Service::getDepasesteCapacitatea() {
+	return depasesteCapacitatea;
 }
 
-void Service::updateMasina(const char* nrInmatriculare, const char* newNumePosesor, const char* newNrInmatriculare, const char* newStatus) {
-	for (int i = 0;i < repo.size();i++)
-	{
-		Masina car = repo.elemAtPoz(i);
-		if (strcmp(car.getNrInmatriculare(), nrInmatriculare) == 0)
-		{
-			repo.updateElem(car, newNumePosesor, newNrInmatriculare, newStatus); break;
-		}
-	}
+int Service::delMasina(Masina& m) {
+	if (strcmp(m.getStatus(), "liber") == 0)
+		return -1;
+	repo.delElem(m);
+	depasesteCapacitatea = 0;
+	repo.saveToFile();
+	return 0;
 }
 
-Masina Service::elemAtPoz(int j)
-{
-	return repo.elemAtPoz(j);
+void Service::updateMasina(Masina& masinaVeche, Masina& masinaNoua) {
+	repo.updateElem(masinaVeche, masinaNoua);
+	repo.saveToFile();
 }
 
 Service::~Service()

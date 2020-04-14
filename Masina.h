@@ -1,4 +1,8 @@
 #pragma once
+#include <string>
+#include <iostream>
+
+using namespace std;
 
 class Masina {
 private:
@@ -6,6 +10,7 @@ private:
 public:
     Masina();
     Masina(const char*, const char*, const char*);
+    Masina(string);
     Masina(const Masina&);
     Masina& operator=(const Masina&);
     char* getNumePosesor();
@@ -15,5 +20,7 @@ public:
     void setNrInmatriculare(const char*);
     void setStatus(const char*);
     bool operator==(const Masina&);
+    friend ostream& operator<<(ostream&, Masina);
+    friend istream& operator>>(istream&, Masina&);
     ~Masina();
 };

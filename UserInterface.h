@@ -12,6 +12,7 @@ public:
 	void deleteMasina();
 	void updateMasina();
 	void printMasini();
+	void depasesteCapacitatea();
 	void run();
 	~UserInterface();
 };
